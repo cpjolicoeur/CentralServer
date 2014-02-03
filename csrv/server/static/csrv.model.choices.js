@@ -201,7 +201,10 @@ csrv.Choice = function(index, choice) {
   }
   if (choice['server'] && this.isRun()) {
     this.server = csrv.gameRegistry[choice['server']];
-    this.server.addChoice(this);
+    // for "trashed/destroyed" remote servers we cant add this choice
+    if (this.server) {
+      this.server.addChoice(this);
+    }
   }
 };
 
