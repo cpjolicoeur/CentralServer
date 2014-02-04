@@ -11,13 +11,15 @@ script = virtualenv.create_bootstrap_script('''
 import os
 import subprocess
 
+requires = ['tornado', 'redis']
+
 def after_install(options, home_dir):
   etc = os.path.join(home_dir, 'etc')
   if not os.path.exists(etc):
     os.makedirs(etc)
-  subprocess.call([
-      join(home_dir, 'bin', 'pip'), 'install', 'tornado',
-  ])
+
+  for r in requires:
+    subprocess.call([os.path.join(home_dir, 'bin', 'pip'), 'install', r])
 
 ''')
 with open('csrv-bootstrap.py', 'w') as script_file:
