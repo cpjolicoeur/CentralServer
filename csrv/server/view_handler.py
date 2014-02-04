@@ -66,7 +66,7 @@ class ChoicesHandler(tornado.web.RequestHandler):
         response = json_serializer.deserialize_response(
             game_data.game, choice_data['response'])
       game_data.game.resolve_current_phase(choice, response)
-      data.Data.dump(game_id)
+      data.Data.dump(game_id, game_data.game)
     return self.get(game_id, side)
 
 
@@ -118,7 +118,7 @@ class GameSocketHandler(websocket.WebSocketHandler):
             phase.choices()))
       try:
         self.game_data.game.resolve_current_phase(choice, response)
-        data.Data.dump(self.game_id)
+        data.Data.dump(self.game_id, self.game_data.game)
       except Exception as e:
         return self.send_error(traceback.format_exc())
     else:

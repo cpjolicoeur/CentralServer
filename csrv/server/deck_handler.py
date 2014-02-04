@@ -36,4 +36,6 @@ class DeckHandler(tornado.web.RequestHandler):
       game_data.runner_deck = deck.RunnerDeck(*decklist)
     if game_data.corp_deck and game_data.runner_deck:
       game_data.game = game.Game(game_data.corp_deck, game_data.runner_deck)
+
+    data.Data.dump(game_id, game_data.game)
     self.redirect('/game/%s/%s/wait' % (game_id, side))
