@@ -5,6 +5,13 @@
     <meta http-equiv="refresh" content="5">
   </head>
   <body>
-    Waiting for other player. Your game will start when they are ready.
+    <p>Waiting for other player. Your game will start when they are ready.</p>
+    <p>
+    {% if side == 'corp' %}
+    Have your opponent visit the following url: <a href="/game/{{ game_id }}/runner/deck">/game/{{ game_id }}/runner/deck</a>
+    {% else %}
+    Have your opponent visit the following url: <a href="/game/{{ game_id }}/corp/deck">/game/{{ game_id }}/corp/deck</a>
+    {% end %}
+    </p>
   </body>
 </html>
